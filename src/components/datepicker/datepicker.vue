@@ -3,6 +3,9 @@
         <div class="datepicker-close-container">
             <img src="../../assets/img/icon-close.png" alt="close">
         </div>
+        <div class="datepicker-title-container">
+            <span class="datepicker-title">可自定义的标题</span>
+        </div>
         <button @click="selectDate">select {{ selectedDate }}</button>
     </div>
 </template>
@@ -38,6 +41,7 @@
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
         background: #fff;
+        text-align: initial;
     }
     $close-vertical-margin: 16px;
     $close-width: 22px;
@@ -52,5 +56,17 @@
         height: $close-width;
         margin-top: $close-vertical-margin;
         margin-right: $close-vertical-margin;
+    }
+    .datepicker-title-container {
+        height: 44px;
+        line-height: 44px;
+        padding-left: 24px;
+        background: rgba(0,0,0,0.04);
+    }
+    .datepicker-title {
+        opacity: 0.85;
+        font-size: 18px;
+        color: rgba(0,0,0,0.85);
+        letter-spacing: 0;
     }
 </styles>
