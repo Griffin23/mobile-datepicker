@@ -6,6 +6,20 @@
         <div class="datepicker-title-container">
             <span class="datepicker-title">可自定义的标题</span>
         </div>
+        <div v-for="index in 2">
+            <div class="datepicker-month-title">
+                <span>2019 {{ index }}月</span>
+            </div>
+            <div class="datepicker-week">
+                <div>日</div>
+                <div>一</div>
+                <div>二</div>
+                <div>三</div>
+                <div>四</div>
+                <div>五</div>
+                <div>六</div>
+            </div>
+        </div>
         <button @click="selectDate">select {{ selectedDate }}</button>
     </div>
 </template>
@@ -48,7 +62,7 @@
     .datepicker-close-container {
         height: $close-width + 2 * $close-vertical-margin
     }
-    .datepicker-close-container img {
+    .datepicker-close-container > img {
         position: absolute;
         top: 0;
         right: 0;
@@ -69,4 +83,28 @@
         color: rgba(0,0,0,0.85);
         letter-spacing: 0;
     }
-</styles>
+    .datepicker-month-title {
+        height: 54px;
+        line-height: 54px;
+        text-align: center;
+    }
+    .date-picker-month-title > span {
+        opacity: 0.85;
+        font-size: 18px;
+        color: rgba(0,0,0,0.85);
+        letter-spacing: 0;
+    }
+    .datepicker-week {
+        font-size: 0;
+    }
+    .datepicker-week > div{
+        display: inline-block;
+        width: 14.27%;
+        line-height: 32px;
+        text-align: center;
+        font-size: 12px;
+        color: rgba(0,0,0,0.85);
+        letter-spacing: 0;
+        font-weight: 800;
+    }
+</style>
