@@ -30,11 +30,16 @@
 </template>
 
 <script>
+    import { DATE_TYPE_ENUM } from '../../assets/js/const.js';
+    import { getDateByDiffDay } from '../../assets/js/util.js';
+
     export default {
         name: 'datepicker',
         data() {
             return {
                 calendarData: [],
+                defaultMinDate: -10,
+                defaultMaxDate: 10,
                 selectedDate: '2019-01-01'
             }
         },
@@ -46,8 +51,8 @@
         },
         methods: {
             initData() {
-                let minDate = this.getDate(this.minDate);
-                let maxDate = this.getDate(this.maxDate);
+                let minDate = this.getDate(this.minDate, DATE_TYPE_ENUM.minDate);
+                let maxDate = this.getDate(this.maxDate, DATE_TYPE_ENUM.maxDate);
                 console.log(minDate);
                 console.log(maxDate);
             },
@@ -57,18 +62,20 @@
             close() {
                 this.$emit('closeDatepicker');
             },
-            getDate(dateStr) {
+            getDate(dateStr, dateType) {
                 // 处理传入 yyyy-MM-dd 的情况
                 let reg = /^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})$/;
                 let results = reg.exec(dateStr);
-                if (results.length > 3) {
+                if (Array.isArray(results) && results.length > 3) {
                     let d = new Date();
                     d.setFullYear(results.groups.year, parseInt(results.groups.month) - 1, results.groups.day);
                     return d;
                 }
-                // TODO 处理传入 相对天数 的情况
-
-                return null;
+                // 处理传入 相对天数 的情况
+                if (Number.isInteger(dateStr)) {
+                    return getDateByDiffDay(dateStr);
+                }
+                return getDateByDiffDay((dateType === DATE_TYPE_ENUM.minDate) ? this.defaultMinDate : this.defaultMaxDate);
             }
         }
     }
