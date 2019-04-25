@@ -3,8 +3,8 @@
         <div class="datepicker-close-container">
             <img src="../../assets/img/icon-close.png" alt="close" @click="close">
         </div>
-        <div class="datepicker-title-container">
-            <span class="datepicker-title">可自定义的标题</span>
+        <div class="datepicker-title-container" v-show="!!title">
+            <span class="datepicker-title">{{ title }}</span>
         </div>
         <div v-for="index in 2">
             <div class="datepicker-month-title">
@@ -37,7 +37,9 @@
                 selectedDate: '2019-01-01'
             }
         },
-        props: ['testProp'],
+        props: [
+            'title'
+        ],
         created() {
             console.log('datepicker created ... ');
         },

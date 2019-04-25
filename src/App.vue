@@ -6,6 +6,7 @@
         </div>
         <datepicker
                 v-show="showDatepickerBool"
+                :title="'Date'"
                 @selectDate="selectDate"
                 @closeDatepicker="closeDatepicker"></datepicker>
     </div>
