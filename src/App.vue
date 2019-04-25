@@ -7,6 +7,8 @@
         <datepicker
                 v-show="showDatepickerBool"
                 :title="'Date'"
+                :min-date="'2018-01-01'"
+                :max-date="'2019-05-01'"
                 @selectDate="selectDate"
                 @closeDatepicker="closeDatepicker"></datepicker>
     </div>

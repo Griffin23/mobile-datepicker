@@ -34,21 +34,41 @@
         name: 'datepicker',
         data() {
             return {
+                calendarData: [],
                 selectedDate: '2019-01-01'
             }
         },
         props: [
-            'title'
+            'title', 'minDate', 'maxDate'
         ],
         created() {
-            console.log('datepicker created ... ');
+            this.initData();
         },
         methods: {
+            initData() {
+                let minDate = this.getDate(this.minDate);
+                let maxDate = this.getDate(this.maxDate);
+                console.log(minDate);
+                console.log(maxDate);
+            },
             selectDate() {
                 this.$emit('selectDate', this.selectedDate);
             },
             close() {
                 this.$emit('closeDatepicker');
+            },
+            getDate(dateStr) {
+                // 处理传入 yyyy-MM-dd 的情况
+                let reg = /^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})$/;
+                let results = reg.exec(dateStr);
+                if (results.length > 3) {
+                    let d = new Date();
+                    d.setFullYear(results.groups.year, parseInt(results.groups.month) - 1, results.groups.day);
+                    return d;
+                }
+                // TODO 处理传入 相对天数 的情况
+
+                return null;
             }
         }
     }
