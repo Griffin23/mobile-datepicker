@@ -1,7 +1,7 @@
 <template>
     <div class="datepicker-container">
         <div class="datepicker-close-container">
-            <img src="../../assets/img/icon-close.png" alt="close">
+            <img src="../../assets/img/icon-close.png" alt="close" @click="close">
         </div>
         <div class="datepicker-title-container">
             <span class="datepicker-title">可自定义的标题</span>
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <button @click="selectDate">select {{ selectedDate }}</button>
+        <button @click="selectDate" v-show="false">select {{ selectedDate }}</button>
     </div>
 </template>
 
@@ -44,6 +44,9 @@
         methods: {
             selectDate() {
                 this.$emit('selectDate', this.selectedDate);
+            },
+            close() {
+                this.$emit('closeDatepicker');
             }
         }
     }

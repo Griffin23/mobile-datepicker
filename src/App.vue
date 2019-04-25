@@ -6,7 +6,8 @@
         </div>
         <datepicker
                 v-show="showDatepickerBool"
-                @selectDate="selectDate"></datepicker>
+                @selectDate="selectDate"
+                @closeDatepicker="closeDatepicker"></datepicker>
     </div>
 </template>
 
@@ -23,6 +24,9 @@
         methods: {
             showDatepicker() {
                 this.showDatepickerBool = true;
+            },
+            closeDatepicker() {
+                this.showDatepickerBool = false;
             },
             selectDate(result) {
                 this.selectedDate = result;
