@@ -19,6 +19,11 @@
                 <div>五</div>
                 <div>六</div>
             </div>
+            <div class="datepicker-day">
+                <div v-for="index in 30">
+                    {{ index }}
+                </div>
+            </div>
         </div>
         <button @click="selectDate">select {{ selectedDate }}</button>
     </div>
@@ -106,5 +111,24 @@
         color: rgba(0,0,0,0.85);
         letter-spacing: 0;
         font-weight: 800;
+    }
+    .datepicker-day > div {
+        display: inline-block;
+        width: 14.27%;
+        line-height: 32px;
+        text-align: center;
+        font-size: 12px;
+        color: rgba(0,0,0,0.64);
+        letter-spacing: 0;
+    }
+    .datepicker-day .selected {
+        color: #ffffff;
+        background-color: #3684FF;
+    }
+    .not-optional {
+        opacity: 0.26;
+    }
+    .in-date-range {
+        background: rgba(0,0,0,0.09);
     }
 </style>
