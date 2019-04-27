@@ -1,11 +1,5 @@
 <template>
     <div class="datepicker-container">
-        <div class="datepicker-close-container">
-            <img src="../../assets/img/icon-close.png" alt="close" @click="close">
-        </div>
-        <div class="datepicker-title-container" v-show="!!title">
-            <span class="datepicker-title">{{ title }}</span>
-        </div>
         <div class="datepicker-select-outer-container">
             <span class="datepicker-select-container">
                 <span class="datepicker-select" @click="toggleSelect(opSelectType.year)">
@@ -15,7 +9,7 @@
                     :class="{'datepicker-options-fixed-ht': anchorYearArr.length > 10}">
                     <li v-for="year in anchorYearArr">
                         <span @click="selectYear(year)"
-                              :class="{'datepicker-options-current': false}">
+                              :class="{'datepicker-options-current': year === selectAnchorYear}">
                             {{ year }}
                         </span>
                     </li>
@@ -34,6 +28,12 @@
                     </li>
                 </ul>
             </span>
+        </div>
+        <div class="datepicker-close-container">
+            <img src="../../assets/img/icon-close.png" alt="close" @click="close">
+        </div>
+        <div class="datepicker-title-container" v-show="!!title">
+            <span class="datepicker-title">{{ title }}</span>
         </div>
         <div v-for="monthData in calendarData">
             <div class="datepicker-month-title">
@@ -137,6 +137,7 @@
                 this.$emit('selectDate', selectResult);
             },
             close() {
+                this.closeSelect(this.opSelectType.year);
                 this.$emit('closeDatepicker');
             },
             getDate(dateStr, dateType) {
@@ -291,6 +292,7 @@
     }
     /* Start select */
     .datepicker-select-outer-container {
+        position: fixed;
         padding-left: px2vw(24px);
         padding-right: px2vw(24px);
         padding-top: px2vw(16px);
@@ -352,6 +354,10 @@
         height: px2vw($datepicker-options-show-length * ($datepicker-options-pt
             + $datepicker-options-lh + $datepicker-options-pb + $datepicker-options-bottom-size));
         @include overflowScroll();
+    }
+    .datepicker-options > li > span[class~=datepicker-options-current] {
+        background: #3684FF;
+        color: #ffffff;
     }
     /* End select */
     .datepicker-month-title {
