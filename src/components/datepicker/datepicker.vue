@@ -31,7 +31,7 @@
 
 <script>
     import { DATE_TYPE_ENUM } from '../../assets/js/const.js';
-    import { getDateByDiffDay } from '../../assets/js/util.js';
+    import { getDateByDiffDay, zeroFormat, getWeekDay } from '../../assets/js/util.js';
 
     export default {
         name: 'datepicker',
@@ -40,6 +40,8 @@
                 calendarData: [],
                 defaultMinDate: -10,
                 defaultMaxDate: 10,
+                startDate: '',
+                endDate: '',
                 selectedDate: '2019-01-01'
             }
         },
@@ -53,13 +55,15 @@
             initData() {
                 let minDate = this.getDate(this.minDate, DATE_TYPE_ENUM.minDate);
                 let maxDate = this.getDate(this.maxDate, DATE_TYPE_ENUM.maxDate);
-                if (minDate.getTime() > maxDate.getTime()) {
+                this.startDate = minDate;
+                this.endDate = maxDate;
+                if (this.startDate.getTime() > this.endDate.getTime()) {
                     return;
                 }
-                let curYear = minDate.getFullYear();
-                let curMonth = minDate.getMonth() + 1;
-                let endYear = maxDate.getFullYear();
-                let endMonth = maxDate.getMonth() + 2;
+                let curYear = this.startDate.getFullYear();
+                let curMonth = this.startDate.getMonth() + 1;
+                let endYear = this.endDate.getFullYear();
+                let endMonth = this.endDate.getMonth() + 2;
                 while (curMonth !== endMonth || curYear !== endYear) {
                     let curData = {
                         year: curYear,
@@ -98,7 +102,52 @@
                 return getDateByDiffDay((dateType === DATE_TYPE_ENUM.minDate) ? this.defaultMinDate : this.defaultMaxDate);
             },
             getMonthData(year, month) {
-                // TODO
+                // monthDataPerWeek是monthRawData按每周七天分割的二层数组
+                let monthDataPerWeek = [];
+                let monthRawData = [];
+                // IOS safari Date的month必须为两位数
+                let formatMonth = zeroFormat(month);
+                // 获取这个月的天数
+                let lastDate = new Date(year, formatMonth, 0);
+                let dayCount = lastDate.getDate();
+                // 将day存入数组
+                let startDateMilliTime = this.startDate.getTime();
+                let endDateMilliTime = this.endDate.getTime();
+                for (let day = 1; day <= dayCount; day++) {
+                    let fullDate = new Date(`${year}-${formatMonth}-${zeroFormat(day)}`);
+                    monthRawData.push({
+                        day: day,
+                        canBeSelected: ((fullDate.getTime() >= startDateMilliTime) && (fullDate.getTime() <= endDateMilliTime)),
+                        // TODO 为以后实现选择两个日期（比如往返程日期）的场景预留的字段
+                        isInSelectedRange: false,
+                        fullDate: fullDate
+                    });
+                }
+                // 计算本月第一天为周几
+                let weekDay = getWeekDay(year, formatMonth, 1);
+                // 添加空串到数组（保持数组第一天为周日）
+                for (let i = 0; i < weekDay; i++) {
+                    monthRawData.unshift({
+                        day: ''
+                    });
+                }
+                // 按照每周七天分割
+                for (let i = 0; i < monthRawData.length; i += 7) {
+                    monthDataPerWeek.push(monthRawData.slice(i, i + 7));
+                }
+                // 补足后面的空串（如最后一周有三个数据，则需要补四个空串）
+                let lastWeekIndex = monthDataPerWeek.length - 1;
+                let lenOfLastWeek = monthDataPerWeek[(lastWeekIndex)].length;
+                let oneWeekLen = 7;
+                if (lenOfLastWeek < oneWeekLen) {
+                    let leftDayLen = oneWeekLen - lenOfLastWeek;
+                    for (let i = 0; i < (leftDayLen); i++) {
+                        monthDataPerWeek[(lastWeekIndex)].push({
+                            day: ''
+                        });
+                    }
+                }
+                return monthDataPerWeek;
             }
         }
     }
