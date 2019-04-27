@@ -80,7 +80,6 @@
                 }
             },
             selectDate(year, month, dayData) {
-                console.log(dayData);
                 if (!dayData.canBeSelected) {
                     return;
                 }
