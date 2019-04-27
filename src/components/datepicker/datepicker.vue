@@ -64,7 +64,7 @@
 <script>
     import { DATE_TYPE_ENUM } from '../../assets/js/const.js';
     import { getDateByDiffDay, zeroFormat, getWeekDay } from '../../assets/js/util.js';
-    import {t} from '../../assets/js/i18n/i18n.js';
+    import { t } from '../../assets/js/i18n/i18n.js';
 
     export default {
         name: 'datepicker',
