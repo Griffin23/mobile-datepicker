@@ -4,6 +4,7 @@
 ```
 <datepicker
         v-show="showDatepickerBool"
+        :lang="'en'"
         :title="'日期选择'"
         :min-date="'2018-01-01'"
         :max-date="3"
@@ -13,6 +14,8 @@
 
 ## 参数说明
 
+- lang
+    - 语言版本，可设置en或zh
 - title
     - 自定义datepicker标题
 - minDate, maxDate
@@ -22,5 +25,5 @@
     
 ## TODO
 
-- 多语言
+- 已选中样式
 - 很久远的时间定位方案

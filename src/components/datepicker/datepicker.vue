@@ -8,16 +8,16 @@
         </div>
         <div v-for="monthData in calendarData">
             <div class="datepicker-month-title">
-                <span>{{ monthData.year }}年 {{ monthData.month }}月</span>
+                <span>{{ t(`month.${monthData.month}.name`) }} {{ monthData.year }}</span>
             </div>
             <div class="datepicker-week">
-                <div>日</div>
-                <div>一</div>
-                <div>二</div>
-                <div>三</div>
-                <div>四</div>
-                <div>五</div>
-                <div>六</div>
+                <div>{{ t('week.sunday.abbr') }}</div>
+                <div>{{ t('week.monday.abbr') }}</div>
+                <div>{{ t('week.tuesday.abbr') }}</div>
+                <div>{{ t('week.wednesday.abbr') }}</div>
+                <div>{{ t('week.thursday.abbr') }}</div>
+                <div>{{ t('week.friday.abbr') }}</div>
+                <div>{{ t('week.saturday.abbr') }}</div>
             </div>
             <div class="datepicker-day" v-for="weekData in monthData.dateArr">
                 <div v-for="dayData in weekData"
@@ -33,6 +33,7 @@
 <script>
     import { DATE_TYPE_ENUM } from '../../assets/js/const.js';
     import { getDateByDiffDay, zeroFormat, getWeekDay } from '../../assets/js/util.js';
+    import {t} from '../../assets/js/i18n/i18n.js';
 
     export default {
         name: 'datepicker',
@@ -46,7 +47,7 @@
             }
         },
         props: [
-            'title', 'minDate', 'maxDate'
+            'title', 'minDate', 'maxDate', 'lang'
         ],
         created() {
             this.initData();
@@ -152,6 +153,9 @@
                     }
                 }
                 return monthDataPerWeek;
+            },
+            t(key) {
+                return t(key, this.lang);
             }
         }
     }
