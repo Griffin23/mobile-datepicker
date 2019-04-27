@@ -8,15 +8,28 @@
         </div>
         <div class="datepicker-select-outer-container">
             <span class="datepicker-select-container">
-                <span class="datepicker-select" @click="toggleSelectYear">
+                <span class="datepicker-select" @click="toggleSelect(opSelectType.year)">
                     {{ selectAnchorYear }}
                 </span>
-                <ul class="datepicker-options" v-show="showSelectOptionsBool"
+                <ul class="datepicker-options" v-show="showSelectYearBool"
                     :class="{'datepicker-options-fixed-ht': anchorYearArr.length > 10}">
                     <li v-for="year in anchorYearArr">
                         <span @click="selectYear(year)"
                               :class="{'datepicker-options-current': false}">
                             {{ year }}
+                        </span>
+                    </li>
+                </ul>
+            </span>
+            <span class="datepicker-select-container" v-if="false">
+                <span class="datepicker-select" @click="toggleSelect(opSelectType.month)">
+                    {{ selectAnchorMonth }}
+                </span>
+                <ul class="datepicker-options" v-show="showSelectMonthBool">
+                    <li v-for="month in 12">
+                        <span @click=""
+                              :class="{'datepicker-options-current': false}">
+                            {{ month }}
                         </span>
                     </li>
                 </ul>
@@ -64,8 +77,14 @@
                 endDate: '',
                 lastSelectedDate: '',
                 selectAnchorYear: 'year',
+                selectAnchorMonth: 'month',
+                opSelectType: {
+                    year: Symbol(),
+                    month: Symbol(),
+                },
                 anchorYearArr: [], // 可选的年份
-                showSelectOptionsBool: false
+                showSelectYearBool: false,
+                showSelectMonthBool: false
             }
         },
         props: [
@@ -204,15 +223,24 @@
                     }
                 }
             },
-            toggleSelectYear() {
-                this.showSelectOptionsBool = !this.showSelectOptionsBool;
+            toggleSelect(opType) {
+                if (opType === this.opSelectType.year) {
+                    this.showSelectYearBool = !this.showSelectYearBool;
+                } else {
+                    this.showSelectMonthBool = !this.showSelectMonthBool;
+                }
             },
-            closeSelectYear() {
-                this.showSelectOptionsBool = false;
+            closeSelect(opType) {
+                if (opType === this.opSelectType.year) {
+                    this.showSelectYearBool = false;
+                } else {
+                    this.showSelectMonthBool = false;
+                }
             },
             selectYear(year) {
                 this.selectAnchorYear = year;
-                this.closeSelectYear();
+                this.closeSelect(this.opSelectType.year);
+                window.location.href = `#anchor-${year}-1`;
             },
             t(key) {
                 return t(key, this.lang);
@@ -264,7 +292,11 @@
     /* Start select */
     .datepicker-select-outer-container {
         padding-left: px2vw(24px);
+        padding-right: px2vw(24px);
         padding-top: px2vw(16px);
+    }
+    .datepicker-select-outer-container > span:nth-child(2) {
+        float: right;
     }
     .datepicker-select-container {
         height: px2vw(24px);
