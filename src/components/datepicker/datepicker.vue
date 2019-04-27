@@ -285,9 +285,8 @@
         background: rgba(0,0,0,0.04);
     }
     .datepicker-title {
-        opacity: 0.85;
         font-size: px2vw(18px);
-        color: rgba(0,0,0,0.85);
+        color: rgb(52,52,52);
         letter-spacing: 0;
     }
     /* Start select */
@@ -314,9 +313,8 @@
         line-height: px2vw(24px);
         border: px2vw(1px) solid #cccccc;
         border-radius: px2vw(4px);
-        background: url('../../assets/img/icon-pullup.png') no-repeat 95% center;
+        background: url('../../assets/img/icon-pullup.png') no-repeat 95% center #ffffff;
         background-size: px2vw(15px) px2vw(15px);
-        opacity: 0.85;
         font-size: px2vw(12px);
         color: rgba(0, 0, 0, 0.85);
         letter-spacing: 0;
