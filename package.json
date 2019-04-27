@@ -1,10 +1,11 @@
 {
   "name": "mobile-datepicker",
-  "description": "A Vue.js project",
+  "description": "mobile-datepicker",
   "version": "1.0.0",
-  "author": "Vellanueva <838884524@qq.com>",
+  "author": "Vellanueva <sunsiquan888@126.com>",
   "license": "MIT",
-  "private": true,
+  "private": false,
+  "main": "dist/mobile-datepicker.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
