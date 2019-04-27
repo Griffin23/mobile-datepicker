@@ -53,8 +53,28 @@
             initData() {
                 let minDate = this.getDate(this.minDate, DATE_TYPE_ENUM.minDate);
                 let maxDate = this.getDate(this.maxDate, DATE_TYPE_ENUM.maxDate);
-                console.log(minDate);
-                console.log(maxDate);
+                if (minDate.getTime() > maxDate.getTime()) {
+                    return;
+                }
+                let curYear = minDate.getFullYear();
+                let curMonth = minDate.getMonth() + 1;
+                let endYear = maxDate.getFullYear();
+                let endMonth = maxDate.getMonth() + 2;
+                while (curMonth !== endMonth || curYear !== endYear) {
+                    let curData = {
+                        year: curYear,
+                        month: curMonth,
+                        dateArr: this.getMonthData(curYear, curMonth)
+                    };
+                    this.calendarData.push(curData);
+                    if (curMonth === 12) {
+                        curYear++;
+                        curMonth = 1;
+                    } else {
+                        curMonth++;
+                    }
+                }
+                console.log(this.calendarData);
             },
             selectDate() {
                 this.$emit('selectDate', this.selectedDate);
@@ -76,6 +96,9 @@
                     return getDateByDiffDay(dateStr);
                 }
                 return getDateByDiffDay((dateType === DATE_TYPE_ENUM.minDate) ? this.defaultMinDate : this.defaultMaxDate);
+            },
+            getMonthData(year, month) {
+                // TODO
             }
         }
     }
