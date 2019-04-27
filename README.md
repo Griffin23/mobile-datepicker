@@ -1,6 +1,18 @@
 # mobile-datepicker
 
 ## 如何使用
+Step 1:
+npm install mobile-fill-screen-datepicker --save-dev
+
+Step 2(in main.js):
+```
+...
+import datepicker from 'mobile-fill-screen-datepicker';
+Vue.use(datepicker);
+...
+```
+
+Step 3(in your vue):
 ```
 <datepicker
         v-show="showDatepickerBool"
