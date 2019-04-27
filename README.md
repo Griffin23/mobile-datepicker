@@ -1,18 +1,10 @@
 # mobile-datepicker
 
-> A Vue.js project
+## 如何使用
 
-## Build Setup
+## 参数说明
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+- minDate, maxDate
+    - 支持传入 yyyy-MM-dd
+    - 支持传入相对天数，如：-10、30
+    - 默认minDate = -10，maxDate = 10。也就是过去10天到未来10天
