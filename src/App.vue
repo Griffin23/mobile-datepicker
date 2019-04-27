@@ -8,7 +8,7 @@
                 v-show="showDatepickerBool"
                 :lang="'en'"
                 :title="'日期选择'"
-                :min-date="'2018-01-01'"
+                :min-date="'2008-01-01'"
                 :max-date="3"
                 @selectDate="selectDate"
                 @closeDatepicker="closeDatepicker"></datepicker>

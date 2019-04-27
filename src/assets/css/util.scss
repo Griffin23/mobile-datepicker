@@ -3,3 +3,21 @@ $default-vw: 375px;
 @function px2vw($px) {
     @return $px / ($default-vw / 100) * 1vw;
 }
+
+@mixin boxShadow($top, $left, $blur, $spread, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $spread $color;
+    -moz-box-shadow:inset $top $left $blur $spread $color;
+    box-shadow:inset $top $left $blur $spread $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $spread $color;
+    -moz-box-shadow: $top $left $blur $spread $color;
+    box-shadow: $top $left $blur $spread $color;
+  }
+}
+
+// 解决safari overflow scroll滑动生涩的问题
+@mixin overflowScroll() {
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}

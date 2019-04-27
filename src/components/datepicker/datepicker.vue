@@ -6,9 +6,27 @@
         <div class="datepicker-title-container" v-show="!!title">
             <span class="datepicker-title">{{ title }}</span>
         </div>
+        <div class="datepicker-select-outer-container">
+            <span class="datepicker-select-container">
+                <span class="datepicker-select" @click="toggleSelectYear">
+                    {{ selectAnchorYear }}
+                </span>
+                <ul class="datepicker-options" v-show="showSelectOptionsBool"
+                    :class="{'datepicker-options-fixed-ht': anchorYearArr.length > 10}">
+                    <li v-for="year in anchorYearArr">
+                        <span @click="selectYear(year)"
+                              :class="{'datepicker-options-current': false}">
+                            {{ year }}
+                        </span>
+                    </li>
+                </ul>
+            </span>
+        </div>
         <div v-for="monthData in calendarData">
             <div class="datepicker-month-title">
-                <span>{{ t(`month.${monthData.month}.name`) }} {{ monthData.year }}</span>
+                <span :id="`anchor-${monthData.year}-${monthData.month}`">
+                    {{ t(`month.${monthData.month}.name`) }} {{ monthData.year }}
+                </span>
             </div>
             <div class="datepicker-week">
                 <div>{{ t('week.sunday.abbr') }}</div>
@@ -44,7 +62,10 @@
                 defaultMaxDate: 10,
                 startDate: '',
                 endDate: '',
-                lastSelectedDate: ''
+                lastSelectedDate: '',
+                selectAnchorYear: 'year',
+                anchorYearArr: [], // 可选的年份
+                showSelectOptionsBool: false
             }
         },
         props: [
@@ -73,6 +94,7 @@
                         dateArr: this.getMonthData(curYear, curMonth)
                     };
                     this.calendarData.push(curData);
+                    this.anchorYearArr.push(curYear);
                     if (curMonth === 12) {
                         curYear++;
                         curMonth = 1;
@@ -80,6 +102,8 @@
                         curMonth++;
                     }
                 }
+                // 可选年份去重
+                this.anchorYearArr = Array.from(new Set(this.anchorYearArr));
             },
             selectDate(year, month, dayData) {
                 if (!dayData.canBeSelected) {
@@ -180,6 +204,16 @@
                     }
                 }
             },
+            toggleSelectYear() {
+                this.showSelectOptionsBool = !this.showSelectOptionsBool;
+            },
+            closeSelectYear() {
+                this.showSelectOptionsBool = false;
+            },
+            selectYear(year) {
+                this.selectAnchorYear = year;
+                this.closeSelectYear();
+            },
             t(key) {
                 return t(key, this.lang);
             }
@@ -227,6 +261,67 @@
         color: rgba(0,0,0,0.85);
         letter-spacing: 0;
     }
+    /* Start select */
+    .datepicker-select-outer-container {
+        padding-left: px2vw(24px);
+        padding-top: px2vw(16px);
+    }
+    .datepicker-select-container {
+        height: px2vw(24px);
+        line-height: px2vw(24px);
+    }
+    $datepicker-select-width: 70px;
+    $datepicker-select-text-pl: 19px;
+    .datepicker-select {
+        display: inline-block;
+        width: px2vw($datepicker-select-width - $datepicker-select-text-pl);
+        height: px2vw(24px);
+        padding-left: px2vw($datepicker-select-text-pl);
+        line-height: px2vw(24px);
+        border: px2vw(1px) solid #cccccc;
+        border-radius: px2vw(4px);
+        background: url('../../assets/img/icon-pullup.png') no-repeat 95% center;
+        background-size: px2vw(15px) px2vw(15px);
+        opacity: 0.85;
+        font-size: px2vw(12px);
+        color: rgba(0, 0, 0, 0.85);
+        letter-spacing: 0;
+    }
+    .datepicker-options {
+        width: px2vw($datepicker-select-width);
+        position: absolute;
+        @include boxShadow(0, px2vw(2px), px2vw(4px), px2vw(1px), rgba(0, 0, 0, 0.25));
+        border-radius: px2vw(4px);
+    }
+    $datepicker-options-lh: 18px;
+    $datepicker-options-fs: 12px;
+    $datepicker-options-pr: 12px;
+    $datepicker-options-pt: 1px;
+    $datepicker-options-pb: 1px;
+    $datepicker-options-bottom-size: 1px;
+    .datepicker-options > li {
+        display: block;
+    }
+    .datepicker-options > li > span {
+        display: block;
+        padding-right: px2vw($datepicker-options-pr);
+        line-height: px2vw($datepicker-options-lh);
+        text-align: right;
+        font-weight: normal;
+        padding-top: px2vw($datepicker-options-pt);
+        padding-bottom: px2vw($datepicker-options-pb);
+        border-bottom: $datepicker-options-bottom-size solid #c6c2c1;
+        font-size: px2vw($datepicker-options-fs);
+        background-color: #ffffff;
+        color: rgba(0, 0, 0, 0.65);
+    }
+    $datepicker-options-show-length: 10;
+    .datepicker-options-fixed-ht {
+        height: px2vw($datepicker-options-show-length * ($datepicker-options-pt
+            + $datepicker-options-lh + $datepicker-options-pb + $datepicker-options-bottom-size));
+        @include overflowScroll();
+    }
+    /* End select */
     .datepicker-month-title {
         height: px2vw(54px);
         line-height: px2vw(54px);
