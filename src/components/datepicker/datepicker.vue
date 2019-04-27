@@ -6,9 +6,9 @@
         <div class="datepicker-title-container" v-show="!!title">
             <span class="datepicker-title">{{ title }}</span>
         </div>
-        <div v-for="index in 2">
+        <div v-for="monthData in calendarData">
             <div class="datepicker-month-title">
-                <span>2019 {{ index }}月</span>
+                <span>{{ monthData.year }}年 {{ monthData.month }}月</span>
             </div>
             <div class="datepicker-week">
                 <div>日</div>
@@ -19,13 +19,14 @@
                 <div>五</div>
                 <div>六</div>
             </div>
-            <div class="datepicker-day">
-                <div v-for="index in 30">
-                    {{ index }}
+            <div class="datepicker-day" v-for="weekData in monthData.dateArr">
+                <div v-for="dayData in weekData"
+                     :class="{'not-optional': !dayData.canBeSelected}"
+                     @click="selectDate(monthData.year, monthData.month, dayData)">
+                    {{ dayData.day }}
                 </div>
             </div>
         </div>
-        <button @click="selectDate" v-show="false">select {{ selectedDate }}</button>
     </div>
 </template>
 
@@ -41,8 +42,7 @@
                 defaultMinDate: -10,
                 defaultMaxDate: 10,
                 startDate: '',
-                endDate: '',
-                selectedDate: '2019-01-01'
+                endDate: ''
             }
         },
         props: [
@@ -78,10 +78,15 @@
                         curMonth++;
                     }
                 }
-                console.log(this.calendarData);
             },
-            selectDate() {
-                this.$emit('selectDate', this.selectedDate);
+            selectDate(year, month, dayData) {
+                console.log(dayData);
+                if (!dayData.canBeSelected) {
+                    return;
+                }
+                let selectResult = `${year}-${zeroFormat(month)}-${zeroFormat(dayData.day)}`
+                this.close();
+                this.$emit('selectDate', selectResult);
             },
             close() {
                 this.$emit('closeDatepicker');
