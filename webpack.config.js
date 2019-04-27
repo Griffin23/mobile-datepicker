@@ -2,7 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: NODE_ENV === 'development' ? './src/main.js' : './src/index.js',
+  entry: process.env.NODE_ENV === 'development' ? './src/main.js' : './src/index.js',
   output: {
     // 修改打包出口，在最外级目录打包出一个 index.js 文件，我们 import 默认会指向这个文件
     path: path.resolve(__dirname, './dist'),
