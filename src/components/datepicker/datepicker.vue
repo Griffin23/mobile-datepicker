@@ -159,6 +159,7 @@
 
 <style lang="scss" scoped>
     @import "../../assets/css/reset.css";
+    @import "../../assets/css/util.scss";
     .datepicker-container {
         position: fixed;
         top: 0;
@@ -173,37 +174,37 @@
     $close-vertical-margin: 16px;
     $close-width: 22px;
     .datepicker-close-container {
-        height: $close-width + 2 * $close-vertical-margin
+        height: px2vw($close-width + 2 * $close-vertical-margin);
     }
     .datepicker-close-container > img {
         position: absolute;
         top: 0;
         right: 0;
-        width: $close-width;
-        height: $close-width;
-        margin-top: $close-vertical-margin;
-        margin-right: $close-vertical-margin;
+        width: px2vw($close-width);
+        height: px2vw($close-width);
+        margin-top: px2vw($close-vertical-margin);
+        margin-right: px2vw($close-vertical-margin);
     }
     .datepicker-title-container {
-        height: 44px;
-        line-height: 44px;
-        padding-left: 24px;
+        height: px2vw(44px);
+        line-height: px2vw(44px);
+        padding-left: px2vw(24px);
         background: rgba(0,0,0,0.04);
     }
     .datepicker-title {
         opacity: 0.85;
-        font-size: 18px;
+        font-size: px2vw(18px);
         color: rgba(0,0,0,0.85);
         letter-spacing: 0;
     }
     .datepicker-month-title {
-        height: 54px;
-        line-height: 54px;
+        height: px2vw(54px);
+        line-height: px2vw(54px);
         text-align: center;
     }
-    .date-picker-month-title > span {
+    .datepicker-month-title > span {
         opacity: 0.85;
-        font-size: 18px;
+        font-size: px2vw(18px);
         color: rgba(0,0,0,0.85);
         letter-spacing: 0;
     }
@@ -213,9 +214,9 @@
     .datepicker-week > div{
         display: inline-block;
         width: 14.27%;
-        line-height: 32px;
+        line-height: px2vw(32px);
         text-align: center;
-        font-size: 12px;
+        font-size: px2vw(12px);
         color: rgba(0,0,0,0.85);
         letter-spacing: 0;
         font-weight: 800;
@@ -223,9 +224,9 @@
     .datepicker-day > div {
         display: inline-block;
         width: 14.27%;
-        line-height: 32px;
+        line-height: px2vw(32px);
         text-align: center;
-        font-size: 12px;
+        font-size: px2vw(12px);
         color: rgba(0,0,0,0.64);
         letter-spacing: 0;
     }

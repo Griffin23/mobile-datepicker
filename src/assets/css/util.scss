@@ -1,0 +1,5 @@
+$default-vw: 375px;
+
+@function px2vw($px) {
+    @return $px / ($default-vw / 100) * 1vw;
+}
