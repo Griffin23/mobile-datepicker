@@ -1,3 +1,6 @@
+## 1.3.0[2019-04-27]
+- readme 完善how to use
+
 ## 1.2.0[2019-04-27]
 - readme english edition
 

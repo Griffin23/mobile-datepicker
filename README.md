@@ -22,6 +22,18 @@ Step 3(in your vue):
         :max-date="3"
         @selectDate="selectDate"
         @closeDatepicker="closeDatepicker"></datepicker>
+        
+...
+
+    methods: {
+        selectDate(result) {
+            // handle result
+            ...
+        },
+        closeDatepicker() {
+            this.showDatepickerBool = false;
+        }
+    }
 ```
 
 ## Params
