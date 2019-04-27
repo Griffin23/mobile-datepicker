@@ -1,6 +1,6 @@
 # mobile-datepicker
 
-## 如何使用
+## How to use
 Step 1:
 npm install mobile-fill-screen-datepicker --save-dev
 
@@ -17,23 +17,25 @@ Step 3(in your vue):
 <datepicker
         v-show="showDatepickerBool"
         :lang="'en'"
-        :title="'日期选择'"
+        :title="'custom title'"
         :min-date="'2018-01-01'"
         :max-date="3"
         @selectDate="selectDate"
         @closeDatepicker="closeDatepicker"></datepicker>
 ```
 
-## 参数说明
+## Params
 
 - lang
-    - 语言版本，可设置en或zh
+    - set language
+        - en
+        - zh
 - title
-    - 自定义datepicker标题
+    - customize your datepicker title
 - minDate, maxDate
-    - 支持传入 yyyy-MM-dd
-    - 支持传入相对天数，如：-10、30
-    - 默认minDate = -10，maxDate = 10。也就是过去10天到未来10天
+    - support input: yyyy-MM-dd
+    - support input number, e.g. -10 or 30
+    - default minDate = -10, maxDate = 10
     
 ## TODO
 
