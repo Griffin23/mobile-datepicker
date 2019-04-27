@@ -1,5 +1,6 @@
 export let i18nDict = {
     en: {
+        chooseYear: 'year',
         month: {
             '1': {
                 name: 'January'
@@ -63,6 +64,7 @@ export let i18nDict = {
         }
     },
     zh: {
+        chooseYear: '年份',
         month: {
             '1': {
                 name: '一月'

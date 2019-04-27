@@ -6,7 +6,7 @@
         </div>
         <datepicker
                 v-show="showDatepickerBool"
-                :lang="'en'"
+                :lang="'zh'"
                 :title="'日期选择'"
                 :min-date="'2008-01-01'"
                 :max-date="3"

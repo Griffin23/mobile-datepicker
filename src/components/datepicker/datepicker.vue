@@ -76,7 +76,7 @@
                 startDate: '',
                 endDate: '',
                 lastSelectedDate: '',
-                selectAnchorYear: 'year',
+                selectAnchorYear: t('chooseYear', this.lang),
                 selectAnchorMonth: 'month',
                 opSelectType: {
                     year: Symbol(),
