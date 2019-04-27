@@ -1,3 +1,6 @@
+## 1.2.0[2019-04-27]
+- readme english edition
+
 ## 1.1.0[2019-04-27]
 - url-loader 图片 -> base64
 
