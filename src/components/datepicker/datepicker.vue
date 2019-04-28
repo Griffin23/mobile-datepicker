@@ -63,7 +63,7 @@
 
 <script>
     import { DATE_TYPE_ENUM } from '../../assets/js/const.js';
-    import { getDateByDiffDay, zeroFormat, getWeekDay } from '../../assets/js/util.js';
+    import { getDateByDiffDay, zeroFormat, getWeekDay, addScrollFixEventListener } from '../../assets/js/util.js';
     import { t } from '../../assets/js/i18n/i18n.js';
 
     export default {
@@ -92,6 +92,9 @@
         ],
         created() {
             this.initData();
+            this.$nextTick(() => {
+                addScrollFixEventListener(document.getElementsByClassName('datepicker-container')[0]);
+            });
         },
         methods: {
             initData() {

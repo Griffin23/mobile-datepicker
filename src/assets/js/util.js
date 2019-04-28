@@ -20,3 +20,19 @@ export function getWeekDay(year, month, day) {
     d.setFullYear(year, parseInt(month) - 1, day);
     return d.getDay();
 }
+
+/***
+ * 为了解决Safari中，蒙层滚动到顶端或底端，再往相同的方向滚动，会触发全局滚动，导致局部滚动失效
+ * @param ele
+ */
+export function addScrollFixEventListener(ele) {
+    ele.addEventListener('touchstart', () => {
+        let scrollTop = ele.scrollTop;
+        if (scrollTop <= 0) {
+            ele.scrollTop = 1;
+        }
+        if (scrollTop + ele.offsetHeight >= ele.scrollHeight) {
+            ele.scrollTop = ele.scrollHeight - ele.offsetHeight - 1;
+        }
+    });
+}
