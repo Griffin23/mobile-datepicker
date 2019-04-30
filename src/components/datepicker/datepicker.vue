@@ -1,5 +1,5 @@
 <template>
-    <div class="datepicker-container">
+    <div class="datepicker-container" v-show="show">
         <div class="datepicker-select-outer-container">
             <span class="datepicker-select-container">
                 <span class="datepicker-select" @click="toggleSelect(opSelectType.year)">
@@ -88,8 +88,14 @@
             }
         },
         props: [
-            'title', 'minDate', 'maxDate', 'lang'
+            'show', 'title', 'minDate', 'maxDate', 'lang'
         ],
+        watch: {
+            show(newVal) {
+                // 禁止背景层发生滚动（全局滚动）
+                document.body.style.overflow = (!!newVal)? 'hidden' : 'visible';
+            }
+        },
         created() {
             this.initData();
             this.$nextTick(() => {

@@ -1,14 +1,14 @@
 <template>
-    <div id="app">
+    <div id="app" style="height: 2000px">
         App.vue - {{ msg }}
         <div>
             date: <input type="text" v-model="selectedDate" @click="showDatepicker">
         </div>
         <datepicker
-                v-show="showDatepickerBool"
-                :lang="'zh'"
-                :title="'日期选择'"
-                :min-date="'2008-01-01'"
+                :show="showDatepickerBool"
+                :lang="'en'"
+                :title="'custom title'"
+                :min-date="'2018-01-01'"
                 :max-date="3"
                 @selectDate="selectDate"
                 @closeDatepicker="closeDatepicker"></datepicker>

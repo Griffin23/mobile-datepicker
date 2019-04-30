@@ -18,7 +18,7 @@ Vue.use(datepicker);
 Step 3(in your vue):
 ```
 <datepicker
-        v-show="showDatepickerBool"
+        :show="showDatepickerBool"
         :lang="'en'"
         :title="'custom title'"
         :min-date="'2018-01-01'"
@@ -41,6 +41,9 @@ Step 3(in your vue):
 
 ## Params
 
+- show(Boolean)
+    - true
+    - false
 - lang
     - set language
         - en
