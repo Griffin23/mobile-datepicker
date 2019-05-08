@@ -88,7 +88,12 @@
             }
         },
         props: [
-            'show', 'title', 'minDate', 'maxDate', 'lang'
+            'show',
+            'title',
+            'minDate',
+            'maxDate',
+            'lang',
+            'format'
         ],
         watch: {
             show(newVal) {
@@ -133,11 +138,27 @@
                 // 可选年份去重
                 this.anchorYearArr = Array.from(new Set(this.anchorYearArr));
             },
+            getFormattedDate(year, month, day) {
+                let formattedDate;
+                if (this.format.indexOf('mm') !== -1 && this.format.indexOf('dd') !== -1) {
+                    formattedDate = this.format
+                        .replace('mm', zeroFormat(month))
+                        .replace('dd', zeroFormat(day));
+                    if (this.format.indexOf('yyyy') !== -1) {
+                        formattedDate = formattedDate.replace('yyyy', year);
+                    } else if (this.format.indexOf('yy') !== -1) {
+                        formattedDate = formattedDate.replace('yy', year.toString().substr(2));
+                    }
+                } else {
+                    formattedDate = `${year}-${zeroFormat(month)}-${zeroFormat(day)}`
+                } 
+                return formattedDate;
+            },
             selectDate(year, month, dayData) {
                 if (!dayData.canBeSelected) {
                     return;
                 }
-                let selectResult = `${year}-${zeroFormat(month)}-${zeroFormat(dayData.day)}`
+                let selectResult = this.getFormattedDate(year, month, dayData.day);
                 // 将上一个选择日期的isLastSelectedDate置为false；同时将当前所选日期的isLastSelectedDate置为true
                 this.setIsLastSelectedDate(this.lastSelectedDate, false);
                 this.setIsLastSelectedDate(selectResult, true);

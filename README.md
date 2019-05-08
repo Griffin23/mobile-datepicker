@@ -23,6 +23,7 @@ Step 3(in your vue):
         :title="'custom title'"
         :min-date="'2018-01-01'"
         :max-date="3"
+        :format="'mm-dd-yy'"
         @selectDate="selectDate"
         @closeDatepicker="closeDatepicker"></datepicker>
         
@@ -54,6 +55,14 @@ Step 3(in your vue):
     - support input: yyyy-MM-dd
     - support input number, e.g. -10 or 30
     - default minDate = -10, maxDate = 10
+- format
+    - custom format. e.g. yyyy-mm-dd or yy-mm-dd or yyyy&whatever&mm&whatever&dd
+    - output: 
+        - yyyy replaced by year. e.g. 2019
+        - yy replaced by short year. e.g. 19
+        - mm replaced by month
+        - dd replaced by day
+    - default yyyy-mm-dd
     
 ## TODO
 
