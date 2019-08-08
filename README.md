@@ -49,6 +49,7 @@ Step 3(in your vue):
     - set language
         - en
         - zh
+    - default en
 - title
     - customize your datepicker title
 - minDate, maxDate

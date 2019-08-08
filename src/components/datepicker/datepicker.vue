@@ -76,7 +76,7 @@
                 startDate: '',
                 endDate: '',
                 lastSelectedDate: '',
-                selectAnchorYear: t('chooseYear', this.lang),
+                selectAnchorYear: '',
                 selectAnchorMonth: 'month',
                 opSelectType: {
                     year: Symbol(),
@@ -84,7 +84,9 @@
                 },
                 anchorYearArr: [], // 可选的年份
                 showSelectYearBool: false,
-                showSelectMonthBool: false
+                showSelectMonthBool: false,
+                language: this.lang,
+                defaultLang: 'en'
             }
         },
         props: [
@@ -109,6 +111,8 @@
         },
         methods: {
             initData() {
+                this.language = (!!this.language) ? this.language : this.defaultLang;
+                this.selectAnchorYear = t('chooseYear', this.language);
                 let minDate = this.getDate(this.minDate, DATE_TYPE_ENUM.minDate);
                 let maxDate = this.getDate(this.maxDate, DATE_TYPE_ENUM.maxDate);
                 this.startDate = minDate;
@@ -274,7 +278,7 @@
                 window.location.href = `#anchor-${year}-1`;
             },
             t(key) {
-                return t(key, this.lang);
+                return t(key, this.language);
             }
         }
     }
