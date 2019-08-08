@@ -52,7 +52,7 @@
             </div>
             <div class="datepicker-day" v-for="weekData in monthData.dateArr">
                 <div v-for="dayData in weekData"
-                     :class="{'not-optional': !dayData.canBeSelected, 'selected': dayData.isLastSelectedDate}"
+                     :class="{'not-optional': !dayData.canBeSelected, 'selected': dayData.isCurSelectedDate}"
                      @click="selectDate(monthData.year, monthData.month, dayData)">
                     {{ dayData.day }}
                 </div>
@@ -75,7 +75,11 @@
                 defaultMaxDate: 10,
                 startDate: '',
                 endDate: '',
-                lastSelectedDate: '',
+                curSelectDateObj: {
+                    year: '',
+                    month: '',
+                    day: '',
+                },
                 selectAnchorYear: '',
                 selectAnchorMonth: 'month',
                 opSelectType: {
@@ -163,10 +167,14 @@
                     return;
                 }
                 let selectResult = this.getFormattedDate(year, month, dayData.day);
-                // 将上一个选择日期的isLastSelectedDate置为false；同时将当前所选日期的isLastSelectedDate置为true
-                this.setIsLastSelectedDate(this.lastSelectedDate, false);
-                this.setIsLastSelectedDate(selectResult, true);
-                this.lastSelectedDate = selectResult;
+                // 将上一个选择日期的isCurSelectedDate置为false；同时将当前所选日期的isCurSelectedDate置为true
+                this.setIsCurSelectedDate(this.curSelectDateObj, false);
+                this.curSelectDateObj = {
+                    year: year,
+                    month: month,
+                    day: dayData.day
+                };
+                this.setIsCurSelectedDate(this.curSelectDateObj, true);
                 this.close();
                 this.$emit('selectDate', selectResult);
             },
@@ -208,7 +216,7 @@
                         canBeSelected: ((fullDate.getTime() >= startDateMilliTime) && (fullDate.getTime() <= endDateMilliTime)),
                         // TODO 为以后实现选择两个日期（比如往返程日期）的场景预留的字段
                         isInSelectedRange: false,
-                        isLastSelectedDate: false,
+                        isCurSelectedDate: false,
                         fullDate: fullDate
                     });
                 }
@@ -238,22 +246,19 @@
                 }
                 return monthDataPerWeek;
             },
-            setIsLastSelectedDate(dateStr, isSelected) {
-                let reg = /^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})$/;
-                let results = reg.exec(dateStr);
-                if (Array.isArray(results) && results.length > 3) {
-                    let year = parseInt(results.groups.year);
-                    let month = parseInt(results.groups.month);
-                    let day = parseInt(results.groups.day);
-                    let dateArr = this.calendarData.find((item) => {
-                        return item.month === month && item.year === year;
-                    }).dateArr;
-                    for (let i = 0; i < dateArr.length; i++) {
-                        for (let j = 0; j < dateArr[i].length; j++) {
-                            if (dateArr[i][j].day === day) {
-                                dateArr[i][j].isLastSelectedDate = isSelected;
-                                return;
-                            }
+            setIsCurSelectedDate(dateObj, isSelected) {
+                let year = parseInt(dateObj.year);
+                let month = parseInt(dateObj.month);
+                let day = parseInt(dateObj.day);
+                let monthData = this.calendarData.find((item) => {
+                    return item.month === month && item.year === year;
+                });
+                let dateArr = (!monthData) ? [] : monthData.dateArr;
+                for (let i = 0; i < dateArr.length; i++) {
+                    for (let j = 0; j < dateArr[i].length; j++) {
+                        if (dateArr[i][j].day === day) {
+                            dateArr[i][j].isCurSelectedDate = isSelected;
+                            return;
                         }
                     }
                 }
