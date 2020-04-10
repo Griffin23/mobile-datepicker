@@ -1,3 +1,6 @@
+## 3.0.0[2020-04-10]
+- format supported by moment.js
+
 ## 2.1.2[2019-08-08]
 - default language en
 
