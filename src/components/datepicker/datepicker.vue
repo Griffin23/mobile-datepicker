@@ -146,20 +146,8 @@
         this.language = this.lang || this.language;
       },
       getFormattedDate(year, month, day) {
-        let formattedDate;
-        if (this.format.indexOf('mm') !== -1 && this.format.indexOf('dd') !== -1) {
-          formattedDate = this.format
-            .replace('mm', zeroFormat(month))
-            .replace('dd', zeroFormat(day));
-          if (this.format.indexOf('yyyy') !== -1) {
-            formattedDate = formattedDate.replace('yyyy', year);
-          } else if (this.format.indexOf('yy') !== -1) {
-            formattedDate = formattedDate.replace('yy', year.toString().substr(2));
-          }
-        } else {
-          formattedDate = `${year}-${zeroFormat(month)}-${zeroFormat(day)}`;
-        }
-        return formattedDate;
+        let dateStr = zeroFormat(year) + zeroFormat(month) + zeroFormat(day);
+        return this.$moment(dateStr, 'YYYYMMDD').format(this.format || 'YYYY-MM-DD');
       },
       selectDate(year, month, dayData) {
         if (!dayData.canBeSelected) {

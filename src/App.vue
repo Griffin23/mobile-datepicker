@@ -10,7 +10,7 @@
       :title="'custom title'"
       :min-date="'2018-01-01'"
       :max-date="3"
-      :format="'mm-dd-yy'"
+      :format="'MM-DD-YY'"
       @selectDate="selectDate"
       @closeDatepicker="closeDatepicker"></datepicker>
   </div>
