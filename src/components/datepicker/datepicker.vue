@@ -115,10 +115,8 @@
     methods: {
       initData() {
         this.selectAnchorYear = t('chooseYear', this.language);
-        let minDate = this.getDate(this.minDate, DATE_TYPE_ENUM.minDate);
-        let maxDate = this.getDate(this.maxDate, DATE_TYPE_ENUM.maxDate);
-        this.startDate = minDate;
-        this.endDate = maxDate;
+        this.startDate = this.getDate(this.minDate, DATE_TYPE_ENUM.minDate);
+        this.endDate = this.getDate(this.maxDate, DATE_TYPE_ENUM.maxDate);
         if (this.startDate.getTime() > this.endDate.getTime()) {
           return;
         }
