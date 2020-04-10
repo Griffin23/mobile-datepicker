@@ -88,8 +88,7 @@
         anchorYearArr: [], // 可选的年份
         showSelectYearBool: false,
         showSelectMonthBool: false,
-        language: this.lang,
-        defaultLang: 'en'
+        language: 'en'
       };
     },
     props: [
@@ -107,6 +106,7 @@
       }
     },
     created() {
+      this.setLanguage();
       this.initData();
       this.$nextTick(() => {
         addScrollFixEventListener(document.getElementsByClassName('datepicker-container')[0]);
@@ -114,7 +114,6 @@
     },
     methods: {
       initData() {
-        this.language = (!!this.language) ? this.language : this.defaultLang;
         this.selectAnchorYear = t('chooseYear', this.language);
         let minDate = this.getDate(this.minDate, DATE_TYPE_ENUM.minDate);
         let maxDate = this.getDate(this.maxDate, DATE_TYPE_ENUM.maxDate);
@@ -144,6 +143,9 @@
         }
         // 可选年份去重
         this.anchorYearArr = Array.from(new Set(this.anchorYearArr));
+      },
+      setLanguage() {
+        this.language = this.lang || this.language;
       },
       getFormattedDate(year, month, day) {
         let formattedDate;
