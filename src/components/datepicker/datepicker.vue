@@ -113,7 +113,6 @@
       initData() {
         this.selectAnchorYear = t('chooseYear', this.language);
         this.startDate = this.getDate(this.options.minDate, DATE_TYPE_ENUM.minDate);
-        console.log('start date: ', this.startDate);
         this.endDate = this.getDate(this.options.maxDate, DATE_TYPE_ENUM.maxDate);
         if (this.startDate.getTime() > this.endDate.getTime()) {
           return;
