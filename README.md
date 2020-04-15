@@ -17,18 +17,26 @@ Vue.use(datepicker);
 
 Step 3(in your vue):
 ```
-<datepicker
-        :show="showDatepickerBool"
-        :lang="'en'"
-        :title="'custom title'"
-        :min-date="'2018-01-01'"
-        :max-date="3"
-        :format="'MM-DD-YY'"
-        @selectDate="selectDate"
-        @closeDatepicker="closeDatepicker"></datepicker>
-        
+    <datepicker
+      :options="datepickerOptions"
+      :show="showDatepickerBool"
+      @selectDate="selectDate"
+      @closeDatepicker="closeDatepicker"></datepicker>
 ...
 
+    data() {
+      return {
+        showDatepickerBool: false,
+        datepickerOptions: {
+          lang: 'en',
+          title: 'custom title',
+          minDate: '2019-01-01',
+          maxDate: '10',
+          format: 'MM-DD-YYYY'
+        }
+      };
+    },
+    ...
     methods: {
         selectDate(result) {
             // handle result
@@ -45,20 +53,22 @@ Step 3(in your vue):
 - show(Boolean)
     - true
     - false
-- lang
-    - set language
-        - en
-        - zh
-    - default en
-- title
-    - customize your datepicker title
-- minDate, maxDate
-    - support input: yyyy-MM-dd
-    - support input number, e.g. -10 or 30
-    - default minDate = -10, maxDate = 10
-- format
-    - custom format. supported by moment.js. For more format details see [moment.js format doc](https://momentjs.com/docs/#/displaying/format/)
-    - default YYYY-MM-DD
+    
+- options
+    - lang
+        - set language
+            - en
+            - zh
+        - default en
+    - title
+        - customize your datepicker title
+    - minDate, maxDate
+        - support input: yyyy-MM-dd
+        - support input number, e.g. -10 or 30
+        - default minDate = -10, maxDate = 10
+    - format
+        - custom format. supported by moment.js. For more format details see [moment.js format doc](https://momentjs.com/docs/#/displaying/format/)
+        - default YYYY-MM-DD
     
 ## TODO
 
