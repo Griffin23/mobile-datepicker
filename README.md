@@ -63,6 +63,7 @@ Step 3(in your vue):
 ## TODO
 
 - 考虑场景：选择往返日期（多个日期选择框，disable去程日期之前的date）
+- 无障碍全键盘访问 a11y
 
 ## Github
 [https://github.com/Griffin23/mobile-datepicker](https://github.com/Griffin23/mobile-datepicker)
