@@ -1,3 +1,6 @@
+## 4.0.0[2020-04-15]
+- refactor for options
+
 ## 3.0.0[2020-04-10]
 - format supported by moment.js
 

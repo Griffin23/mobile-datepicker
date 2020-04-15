@@ -5,12 +5,8 @@
       date: <input type="text" v-model="selectedDate" @click="showDatepicker">
     </div>
     <datepicker
+      :options="datepickerOptions"
       :show="showDatepickerBool"
-      :lang="'en'"
-      :title="'custom title'"
-      :min-date="'2018-01-01'"
-      :max-date="3"
-      :format="'MM-DD-YY'"
       @selectDate="selectDate"
       @closeDatepicker="closeDatepicker"></datepicker>
   </div>
@@ -23,7 +19,14 @@
       return {
         msg: 'Welcome to Your Vue.js App',
         showDatepickerBool: false,
-        selectedDate: ''
+        selectedDate: '',
+        datepickerOptions: {
+          lang: 'en',
+          title: 'custom title11',
+          minDate: '2019-01-01',
+          maxDate: '10',
+          format: 'MM-DD-YYYY'
+        }
       };
     },
     methods: {

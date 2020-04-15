@@ -31,8 +31,8 @@
     <div class="datepicker-close-container">
       <img src="../../assets/img/icon-close.png" alt="close" @click="close">
     </div>
-    <div class="datepicker-title-container" v-show="!!title">
-      <span class="datepicker-title">{{ title }}</span>
+    <div class="datepicker-title-container" v-show="!!options.title">
+      <span class="datepicker-title">{{ options.title }}</span>
     </div>
     <div v-for="monthData in calendarData">
       <div class="datepicker-month-title">
@@ -93,11 +93,7 @@
     },
     props: [
       'show',
-      'title',
-      'minDate',
-      'maxDate',
-      'lang',
-      'format'
+      'options'
     ],
     watch: {
       show(newVal) {
@@ -106,6 +102,7 @@
       }
     },
     created() {
+      this.options = this.options || {};
       this.setLanguage();
       this.initData();
       this.$nextTick(() => {
@@ -115,8 +112,9 @@
     methods: {
       initData() {
         this.selectAnchorYear = t('chooseYear', this.language);
-        this.startDate = this.getDate(this.minDate, DATE_TYPE_ENUM.minDate);
-        this.endDate = this.getDate(this.maxDate, DATE_TYPE_ENUM.maxDate);
+        this.startDate = this.getDate(this.options.minDate, DATE_TYPE_ENUM.minDate);
+        console.log('start date: ', this.startDate);
+        this.endDate = this.getDate(this.options.maxDate, DATE_TYPE_ENUM.maxDate);
         if (this.startDate.getTime() > this.endDate.getTime()) {
           return;
         }
@@ -143,11 +141,11 @@
         this.anchorYearArr = Array.from(new Set(this.anchorYearArr));
       },
       setLanguage() {
-        this.language = this.lang || this.language;
+        this.language = this.options.lang || this.language;
       },
       getFormattedDate(year, month, day) {
         let dateStr = zeroFormat(year) + zeroFormat(month) + zeroFormat(day);
-        return this.$moment(dateStr, 'YYYYMMDD').format(this.format || 'YYYY-MM-DD');
+        return this.$moment(dateStr, 'YYYYMMDD').format(this.options.format || 'YYYY-MM-DD');
       },
       selectDate(year, month, dayData) {
         if (!dayData.canBeSelected) {
