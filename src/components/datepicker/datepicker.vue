@@ -1,21 +1,22 @@
 <template>
   <div class="datepicker-container" v-show="show">
-    <div class="datepicker-select-outer-container">
+    <div class="datepicker-modal-container">
+      <div class="datepicker-select-outer-container">
       <span class="datepicker-select-container">
         <span class="datepicker-select" @click="toggleSelect(opSelectType.year)">
           {{ selectAnchorYear }}
         </span>
         <ul class="datepicker-options" v-show="showSelectYearBool"
-          :class="{'datepicker-options-fixed-ht': anchorYearArr.length > 10}">
+            :class="{'datepicker-options-fixed-ht': anchorYearArr.length > 10}">
           <li v-for="year in anchorYearArr">
             <span @click="selectYear(year)"
-              :class="{'datepicker-options-current': year === selectAnchorYear}">
+                  :class="{'datepicker-options-current': year === selectAnchorYear}">
               {{ year }}
             </span>
           </li>
         </ul>
       </span>
-      <span class="datepicker-select-container" v-if="false">
+        <span class="datepicker-select-container" v-if="false">
         <span class="datepicker-select" @click="toggleSelect(opSelectType.month)">
           {{ selectAnchorMonth }}
         </span>
@@ -27,33 +28,34 @@
           </li>
         </ul>
       </span>
-    </div>
-    <div class="datepicker-close-container">
-      <img src="../../assets/img/icon-close.png" alt="close" @click="close">
-    </div>
-    <div class="datepicker-title-container" v-show="!!options.title">
-      <span class="datepicker-title">{{ options.title }}</span>
-    </div>
-    <div v-for="monthData in calendarData">
-      <div class="datepicker-month-title">
+      </div>
+      <div class="datepicker-close-container">
+        <img src="../../assets/img/icon-close.png" alt="close" @click="close">
+      </div>
+      <div class="datepicker-title-container" v-show="!!options.title">
+        <span class="datepicker-title">{{ options.title }}</span>
+      </div>
+      <div v-for="monthData in calendarData">
+        <div class="datepicker-month-title">
         <span :id="`anchor-${monthData.year}-${monthData.month}`">
           {{ t(`month.${monthData.month}.name`) }} {{ monthData.year }}
         </span>
-      </div>
-      <div class="datepicker-week">
-        <div>{{ t('week.sunday.abbr') }}</div>
-        <div>{{ t('week.monday.abbr') }}</div>
-        <div>{{ t('week.tuesday.abbr') }}</div>
-        <div>{{ t('week.wednesday.abbr') }}</div>
-        <div>{{ t('week.thursday.abbr') }}</div>
-        <div>{{ t('week.friday.abbr') }}</div>
-        <div>{{ t('week.saturday.abbr') }}</div>
-      </div>
-      <div class="datepicker-day" v-for="weekData in monthData.dateArr">
-        <div v-for="dayData in weekData"
-             :class="{'not-optional': !dayData.canBeSelected, 'selected': dayData.isCurSelectedDate}"
-             @click="selectDate(monthData.year, monthData.month, dayData)">
-          {{ dayData.day }}
+        </div>
+        <div class="datepicker-week">
+          <div>{{ t('week.sunday.abbr') }}</div>
+          <div>{{ t('week.monday.abbr') }}</div>
+          <div>{{ t('week.tuesday.abbr') }}</div>
+          <div>{{ t('week.wednesday.abbr') }}</div>
+          <div>{{ t('week.thursday.abbr') }}</div>
+          <div>{{ t('week.friday.abbr') }}</div>
+          <div>{{ t('week.saturday.abbr') }}</div>
+        </div>
+        <div class="datepicker-day" v-for="weekData in monthData.dateArr">
+          <div v-for="dayData in weekData"
+               :class="{'not-optional': !dayData.canBeSelected, 'selected': dayData.isCurSelectedDate}"
+               @click="selectDate(monthData.year, monthData.month, dayData)">
+            {{ dayData.day }}
+          </div>
         </div>
       </div>
     </div>
@@ -295,6 +297,24 @@
     -webkit-overflow-scrolling: touch;
     background: #fff;
     text-align: initial;
+
+    @include large-screen-style {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .datepicker-modal-container {
+      background-color: #FFF;
+
+      @include large-screen-style {
+        position: fixed;
+        width: 650px;
+        height: 650px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+    }
   }
 
   $close-vertical-margin: 16px;
@@ -311,6 +331,11 @@
     height: px2vw($close-width);
     margin-top: px2vw($close-vertical-margin);
     margin-right: px2vw($close-vertical-margin);
+
+    @include large-screen-style {
+      width: px2vw(24px, true);
+      height: px2vw(24px, true);
+    }
   }
 
   .datepicker-title-container {
