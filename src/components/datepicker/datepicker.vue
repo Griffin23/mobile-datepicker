@@ -297,6 +297,7 @@
     -webkit-overflow-scrolling: touch;
     background: #fff;
     text-align: initial;
+    font-size: 16px;
 
     @include large-screen-style {
       background-color: rgba(0, 0, 0, 0.5);
@@ -307,8 +308,8 @@
 
       @include large-screen-style {
         position: fixed;
-        width: 650px;
-        height: 650px;
+        width: px2em(700px);
+        height: px2em(700px);
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -320,33 +321,33 @@
   $close-vertical-margin: 16px;
   $close-width: 22px;
   .datepicker-close-container {
-    height: px2vw($close-width + 2 * $close-vertical-margin);
+    height: px2em($close-width + 2 * $close-vertical-margin);
   }
 
   .datepicker-close-container > img {
     position: absolute;
     top: 0;
     right: 0;
-    width: px2vw($close-width);
-    height: px2vw($close-width);
-    margin-top: px2vw($close-vertical-margin);
-    margin-right: px2vw($close-vertical-margin);
+    width: px2em($close-width);
+    height: px2em($close-width);
+    margin-top: px2em($close-vertical-margin);
+    margin-right: px2em($close-vertical-margin);
 
     @include large-screen-style {
-      width: px2vw(24px, true);
-      height: px2vw(24px, true);
+      width: px2em(24px);
+      height: px2em(24px);
     }
   }
 
   .datepicker-title-container {
-    height: px2vw(44px);
-    line-height: px2vw(44px);
-    padding-left: px2vw(24px);
+    height: px2em(44px);
+    line-height: px2em(44px);
+    padding-left: px2em(24px);
     background: rgba(0, 0, 0, 0.04);
   }
 
   .datepicker-title {
-    font-size: px2vw(18px);
+    font-size: px2em(18px);
     color: rgb(52, 52, 52);
     letter-spacing: 0;
   }
@@ -354,9 +355,9 @@
   /* Start select */
   .datepicker-select-outer-container {
     position: fixed;
-    padding-left: px2vw(24px);
-    padding-right: px2vw(24px);
-    padding-top: px2vw(16px);
+    padding-left: px2em(24px);
+    padding-right: px2em(24px);
+    padding-top: px2em(16px);
   }
 
   .datepicker-select-outer-container > span:nth-child(2) {
@@ -364,32 +365,32 @@
   }
 
   .datepicker-select-container {
-    height: px2vw(24px);
-    line-height: px2vw(24px);
+    height: px2em(24px);
+    line-height: px2em(24px);
   }
 
   $datepicker-select-width: 70px;
   $datepicker-select-text-pl: 19px;
   .datepicker-select {
+    font-size: px2em(12px);
     display: inline-block;
-    width: px2vw($datepicker-select-width - $datepicker-select-text-pl);
-    height: px2vw(24px);
-    padding-left: px2vw($datepicker-select-text-pl);
-    line-height: px2vw(24px);
-    border: px2vw(1px) solid #cccccc;
-    border-radius: px2vw(4px);
+    width: px2em($datepicker-select-width - $datepicker-select-text-pl, 12px);
+    height: px2em(24px, 12px);
+    padding-left: px2em($datepicker-select-text-pl, 12px);
+    line-height: px2em(24px, 12px);
+    border: px2em(1px, 12px) solid #cccccc;
+    border-radius: px2em(4px, 12px);
     background: url('../../assets/img/icon-pullup.png') no-repeat 95% center #ffffff;
-    background-size: px2vw(15px) px2vw(15px);
-    font-size: px2vw(12px);
+    background-size: px2em(15px, 12px) px2em(15px, 12px);
     color: rgba(0, 0, 0, 0.85);
     letter-spacing: 0;
   }
 
   .datepicker-options {
-    width: px2vw($datepicker-select-width);
+    width: px2em($datepicker-select-width);
     position: absolute;
-    @include boxShadow(0, px2vw(2px), px2vw(4px), px2vw(1px), rgba(0, 0, 0, 0.25));
-    border-radius: px2vw(4px);
+    @include boxShadow(0, px2em(2px), px2em(4px), px2em(1px), rgba(0, 0, 0, 0.25));
+    border-radius: px2em(4px);
   }
 
   $datepicker-options-lh: 18px;
@@ -404,21 +405,21 @@
 
   .datepicker-options > li > span {
     display: block;
-    padding-right: px2vw($datepicker-options-pr);
-    line-height: px2vw($datepicker-options-lh);
+    padding-right: px2em($datepicker-options-pr);
+    line-height: px2em($datepicker-options-lh);
     text-align: right;
     font-weight: normal;
-    padding-top: px2vw($datepicker-options-pt);
-    padding-bottom: px2vw($datepicker-options-pb);
+    padding-top: px2em($datepicker-options-pt);
+    padding-bottom: px2em($datepicker-options-pb);
     border-bottom: $datepicker-options-bottom-size solid #c6c2c1;
-    font-size: px2vw($datepicker-options-fs);
+    font-size: px2em($datepicker-options-fs);
     background-color: #ffffff;
     color: rgba(0, 0, 0, 0.65);
   }
 
   $datepicker-options-show-length: 10;
   .datepicker-options-fixed-ht {
-    height: px2vw($datepicker-options-show-length * ($datepicker-options-pt
+    height: px2em($datepicker-options-show-length * ($datepicker-options-pt
             + $datepicker-options-lh + $datepicker-options-pb + $datepicker-options-bottom-size));
     @include overflowScroll();
   }
@@ -430,14 +431,14 @@
 
   /* End select */
   .datepicker-month-title {
-    height: px2vw(54px);
-    line-height: px2vw(54px);
+    height: px2em(54px);
+    line-height: px2em(54px);
     text-align: center;
   }
 
   .datepicker-month-title > span {
     opacity: 0.85;
-    font-size: px2vw(18px);
+    font-size: px2em(18px);
     color: rgba(0, 0, 0, 0.85);
     letter-spacing: 0;
   }
@@ -447,22 +448,22 @@
   }
 
   .datepicker-week > div {
+    font-size: 12px;
     display: inline-block;
     width: 14.27%;
-    line-height: px2vw(32px);
+    line-height: px2em(32px, 12px);
     text-align: center;
-    font-size: px2vw(12px);
     color: rgba(0, 0, 0, 0.85);
     letter-spacing: 0;
     font-weight: 800;
   }
 
   .datepicker-day > div {
+    font-size: px2em(12px);
     display: inline-block;
     width: 14.27%;
-    line-height: px2vw(32px);
+    line-height: px2em(32px, 12px);
     text-align: center;
-    font-size: px2vw(12px);
     color: rgba(0, 0, 0, 0.64);
     letter-spacing: 0;
   }

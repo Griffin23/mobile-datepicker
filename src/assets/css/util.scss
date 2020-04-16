@@ -1,12 +1,5 @@
-$default-vw: 375px;
-$default-vw-pc: 1920px;
-
-@function px2vw($px, $isPC: false) {
-  @if $isPC {
-    @return $px / ($default-vw-pc / 100) * 1vw;
-  } @else {
-    @return $px / ($default-vw / 100) * 1vw;
-  }
+@function px2em($px, $context: 16px) {
+  @return ($px / $context) * 1em;
 }
 
 @mixin boxShadow($top, $left, $blur, $spread, $color, $inset: false) {

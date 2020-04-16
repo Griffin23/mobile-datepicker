@@ -22,7 +22,7 @@
         selectedDate: '',
         datepickerOptions: {
           lang: 'en',
-          title: 'custom title11',
+          title: 'your title',
           minDate: '2001-01-01',
           maxDate: '10',
           format: 'MM-DD-YYYY'
