@@ -93,6 +93,14 @@
     },
     props: [
       'show',
+      // options示例
+      // {
+      //   lang: 'en',
+      //   title: 'custom title11',
+      //   minDate: '2019-01-01',
+      //   maxDate: '10',
+      //   format: 'MM-DD-YYYY',
+      // }
       'options'
     ],
     watch: {
