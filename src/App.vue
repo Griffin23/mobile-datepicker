@@ -23,7 +23,7 @@
         datepickerOptions: {
           lang: 'en',
           title: 'custom title11',
-          minDate: '2019-01-01',
+          minDate: '2001-01-01',
           maxDate: '10',
           format: 'MM-DD-YYYY'
         }

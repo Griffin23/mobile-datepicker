@@ -1,7 +1,12 @@
 $default-vw: 375px;
+$default-vw-pc: 1920px;
 
-@function px2vw($px) {
+@function px2vw($px, $isPC: false) {
+  @if $isPC {
+    @return $px / ($default-vw-pc / 100) * 1vw;
+  } @else {
     @return $px / ($default-vw / 100) * 1vw;
+  }
 }
 
 @mixin boxShadow($top, $left, $blur, $spread, $color, $inset: false) {
@@ -21,3 +26,5 @@ $default-vw: 375px;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
 }
+
+@import "./rwd/rwd.scss";
