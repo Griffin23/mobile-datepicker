@@ -112,3 +112,8 @@ $screen-size-enum: ("lg": lg, "sm": sm);
     width: 1200px;
   }
 }
+
+.flex-place-holder {
+  display: block;
+  flex: 1;
+}

@@ -1,6 +1,11 @@
 <template>
   <div class="datepicker-container" v-show="show">
     <div class="datepicker-modal-container">
+      <div class="datepicker-title-container">
+        <div class="datepicker-title">{{ options.title }}</div>
+        <div class="flex-place-holder"></div>
+        <img src="../../assets/img/icon-close.png" alt="close" @click="close" class="datepicker-close-img">
+      </div>
       <div class="datepicker-select-outer-container">
       <span class="datepicker-select-container">
         <span class="datepicker-select" @click="toggleSelect(opSelectType.year)">
@@ -16,26 +21,11 @@
           </li>
         </ul>
       </span>
-        <span class="datepicker-select-container" v-if="false">
-        <span class="datepicker-select" @click="toggleSelect(opSelectType.month)">
-          {{ selectAnchorMonth }}
-        </span>
-        <ul class="datepicker-options" v-show="showSelectMonthBool">
-          <li v-for="month in 12">
-            <span @click="" :class="{'datepicker-options-current': false}">
-              {{ month }}
-            </span>
-          </li>
-        </ul>
-      </span>
       </div>
-      <div class="datepicker-close-container">
-        <img src="../../assets/img/icon-close.png" alt="close" @click="close">
+      <div class="small-screen-hide">
+        pc content
       </div>
-      <div class="datepicker-title-container" v-show="!!options.title">
-        <span class="datepicker-title">{{ options.title }}</span>
-      </div>
-      <div v-for="monthData in calendarData">
+      <div class="large-screen-hide" v-for="monthData in calendarData">
         <div class="datepicker-month-title">
         <span :id="`anchor-${monthData.year}-${monthData.month}`">
           {{ t(`month.${monthData.month}.name`) }} {{ monthData.year }}
@@ -313,7 +303,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        overflow: hidden;
+        @include overflowScroll();
       }
     }
   }
@@ -340,24 +330,33 @@
   }
 
   .datepicker-title-container {
-    height: px2em(44px);
+    display: flex;
+    align-items: center;
     line-height: px2em(44px);
-    padding-left: px2em(24px);
+    padding: 0 px2em(24px);
     background: rgba(0, 0, 0, 0.04);
-  }
 
-  .datepicker-title {
-    font-size: px2em(18px);
-    color: rgb(52, 52, 52);
-    letter-spacing: 0;
+    .datepicker-title {
+      font-size: px2em(18px);
+      color: rgb(52, 52, 52);
+      letter-spacing: 0;
+    }
+
+    .datepicker-close-img {
+      height: px2em(24px);
+      width: px2em(24px);
+    }
   }
 
   /* Start select */
   .datepicker-select-outer-container {
-    position: fixed;
     padding-left: px2em(24px);
     padding-right: px2em(24px);
     padding-top: px2em(16px);
+
+    @include small-screen-style {
+      position: fixed;
+    }
   }
 
   .datepicker-select-outer-container > span:nth-child(2) {
