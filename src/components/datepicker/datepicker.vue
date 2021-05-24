@@ -22,29 +22,28 @@
         </ul>
       </span>
       </div>
-      <div class="small-screen-hide">
-        pc content
-      </div>
-      <div class="large-screen-hide" v-for="monthData in calendarData">
-        <div class="datepicker-month-title">
+      <div class="datepicker-content-container">
+        <div v-for="monthData in calendarData">
+          <div class="datepicker-month-title">
         <span :id="`anchor-${monthData.year}-${monthData.month}`">
           {{ t(`month.${monthData.month}.name`) }} {{ monthData.year }}
         </span>
-        </div>
-        <div class="datepicker-week">
-          <div>{{ t('week.sunday.abbr') }}</div>
-          <div>{{ t('week.monday.abbr') }}</div>
-          <div>{{ t('week.tuesday.abbr') }}</div>
-          <div>{{ t('week.wednesday.abbr') }}</div>
-          <div>{{ t('week.thursday.abbr') }}</div>
-          <div>{{ t('week.friday.abbr') }}</div>
-          <div>{{ t('week.saturday.abbr') }}</div>
-        </div>
-        <div class="datepicker-day" v-for="weekData in monthData.dateArr">
-          <div v-for="dayData in weekData"
-               :class="{'not-optional': !dayData.canBeSelected, 'selected': dayData.isCurSelectedDate}"
-               @click="selectDate(monthData.year, monthData.month, dayData)">
-            {{ dayData.day }}
+          </div>
+          <div class="datepicker-week">
+            <div>{{ t('week.sunday.abbr') }}</div>
+            <div>{{ t('week.monday.abbr') }}</div>
+            <div>{{ t('week.tuesday.abbr') }}</div>
+            <div>{{ t('week.wednesday.abbr') }}</div>
+            <div>{{ t('week.thursday.abbr') }}</div>
+            <div>{{ t('week.friday.abbr') }}</div>
+            <div>{{ t('week.saturday.abbr') }}</div>
+          </div>
+          <div class="datepicker-day" v-for="weekData in monthData.dateArr">
+            <div v-for="dayData in weekData"
+                 :class="{'not-optional': !dayData.canBeSelected, 'selected': dayData.isCurSelectedDate}"
+                 @click="selectDate(monthData.year, monthData.month, dayData)">
+              {{ dayData.day }}
+            </div>
           </div>
         </div>
       </div>
@@ -299,7 +298,6 @@
       @include large-screen-style {
         position: fixed;
         width: px2em(700px);
-        height: px2em(700px);
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -347,7 +345,8 @@
     }
   }
 
-  /* Start select */
+  // region select
+
   .datepicker-select-outer-container {
     padding-left: px2em(24px);
     padding-right: px2em(24px);
@@ -427,7 +426,15 @@
     color: #ffffff;
   }
 
-  /* End select */
+  // endregion
+
+  .datepicker-content-container {
+    @include large-screen-style {
+      height: px2em(490px);
+      overflow: scroll;
+    }
+  }
+
   .datepicker-month-title {
     height: px2em(54px);
     line-height: px2em(54px);
