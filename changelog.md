@@ -1,5 +1,7 @@
-## 5.0.0[xxx]
+## 4.1.0[2021-05-27]
 - css vw vh to em
+- 引入rwd
+- pc效果调整
 
 ## 4.0.0[2020-04-15]
 - refactor for options
