@@ -2,7 +2,14 @@
   <div id="app" style="height: 2000px">
     App.vue - {{ msg }}
     <div>
-      date: <input type="text" v-model="selectedDate" @click="showDatepicker">
+      date:
+      <input
+        type="text"
+        readonly
+        v-model="selectedDate"
+        @click="showDatepicker"
+        style="cursor: default"
+      >
     </div>
     <datepicker
       :options="datepickerOptions"

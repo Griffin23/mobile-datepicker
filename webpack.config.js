@@ -4,7 +4,8 @@ let webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  entry: process.env.NODE_ENV === 'development' ? './src/main.js' : './src/index.js',
+  entry: process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production4demo' ?
+    './src/main.js' : './src/index.js',
   output: {
     // 修改打包出口，在最外级目录打包出一个 index.js 文件，我们 import 默认会指向这个文件
     path: path.resolve(__dirname, './dist'),
@@ -92,7 +93,7 @@ module.exports = {
   devtool: '#eval-source-map'
 };
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'production4demo') {
   module.exports.devtool = '#source-map';
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
