@@ -55,6 +55,7 @@
   import { DATE_TYPE_ENUM } from '../../assets/js/const.js';
   import { getDateByDiffDay, zeroFormat, getWeekDay, addScrollFixEventListener } from '../../assets/js/util.js';
   import { t } from '../../assets/js/i18n/i18n.js';
+  import moment from 'moment';
 
   export default {
     name: 'datepicker',
@@ -143,7 +144,7 @@
       },
       getFormattedDate(year, month, day) {
         let dateStr = zeroFormat(year) + zeroFormat(month) + zeroFormat(day);
-        return this.$moment(dateStr, 'YYYYMMDD').format(this.options.format || 'YYYY-MM-DD');
+        return moment(dateStr, 'YYYYMMDD').format(this.options.format || 'YYYY-MM-DD');
       },
       selectDate(year, month, dayData) {
         if (!dayData.canBeSelected) {
