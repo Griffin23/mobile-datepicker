@@ -4,21 +4,21 @@
  * @returns {Date}
  */
 export function getDateByDiffDay(diffDay) {
-  let today = new Date();
-  let time = today.getTime() + diffDay * 24 * 60 * 60 * 1000;
-  return new Date(time);
+  let today = new Date()
+  let time = today.getTime() + diffDay * 24 * 60 * 60 * 1000
+  return new Date(time)
 }
 
 // 小于10，前面加0
 export function zeroFormat(d) {
-  return (parseInt(d) < 10) ? `0${d}` : d;
+  return (parseInt(d) < 10) ? `0${d}` : d
 }
 
 // 计算周几
 export function getWeekDay(year, month, day) {
-  let d = new Date();
-  d.setFullYear(year, parseInt(month) - 1, day);
-  return d.getDay();
+  let d = new Date()
+  d.setFullYear(year, parseInt(month) - 1, day)
+  return d.getDay()
 }
 
 /***
@@ -27,12 +27,12 @@ export function getWeekDay(year, month, day) {
  */
 export function addScrollFixEventListener(ele) {
   ele.addEventListener('touchstart', () => {
-    let scrollTop = ele.scrollTop;
+    let scrollTop = ele.scrollTop
     if (scrollTop <= 0) {
-      ele.scrollTop = 1;
+      ele.scrollTop = 1
     }
     if (scrollTop + ele.offsetHeight >= ele.scrollHeight) {
-      ele.scrollTop = ele.scrollHeight - ele.offsetHeight - 1;
+      ele.scrollTop = ele.scrollHeight - ele.offsetHeight - 1
     }
-  });
+  })
 }
