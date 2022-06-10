@@ -10,8 +10,8 @@ npm install mobile-fill-screen-datepicker --save-dev
 Step 2(in main.js):
 ```
 ...
-import datepicker from 'mobile-fill-screen-datepicker';
-Vue.use(datepicker);
+import datepicker from 'mobile-fill-screen-datepicker'
+Vue.use(datepicker)
 ...
 ```
 
@@ -19,33 +19,37 @@ Step 3(in your vue):
 ```
     <datepicker
       :options="datepickerOptions"
-      :show="showDatepickerBool"
+      :show="isShowDatePicker"
       @selectDate="selectDate"
-      @closeDatepicker="closeDatepicker"></datepicker>
+      @closeDatepicker="closeDatepicker" 
+    />
+    
 ...
 
     data() {
       return {
-        showDatepickerBool: false,
+        isShowDatePicker: false,
         datepickerOptions: {
           lang: 'en',
           title: 'custom title',
           minDate: '2019-01-01',
           maxDate: '10',
-          format: 'MM-DD-YYYY'
-        }
-      };
-    },
-    ...
-    methods: {
-        selectDate(result) {
-            // handle result
-            ...
+          format: 'MM-DD-YYYY',
         },
-        closeDatepicker() {
-            this.showDatepickerBool = false;
-        }
-    }
+      }
+    },
+    
+...
+    
+  methods: {
+    selectDate(result) {
+      // handle result
+      console.log(result)
+    },
+    closeDatepicker() {
+      this.showDatepickerBool = false
+    },
+  },
 ```
 
 ## Params
@@ -56,7 +60,7 @@ Step 3(in your vue):
     
 - options
     - lang
-        - set language
+        - language
             - en
             - zh
         - default en
